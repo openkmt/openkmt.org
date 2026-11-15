@@ -1,0 +1,509 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KMT · Le logiciel libre africain</title>
+<meta name="description" content="KMT, de Kemet « la terre noire » : la fondation open source africaine. Zeno, EDMS et une communauté qui construit le logiciel du continent.">
+<meta property="og:title" content="KMT · Le logiciel libre africain.">
+<meta property="og:description" content="La fondation open source africaine. Appel à projets, première vague.">
+<meta property="og:image" content="https://openkmt.org/img/og.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://openkmt.org/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://openkmt.org/">
+<link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Fondation KMT","alternateName":"Kemet","url":"https://openkmt.org/","logo":"https://openkmt.org/img/icon-512.png","slogan":"Le logiciel libre africain.","email":"fbi@devpanl.dev","areaServed":"Africa","nonprofitStatus":"Nonprofit"}</script>
+<meta name="theme-color" content="#16130F">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%2316130F'/%3E%3Cg fill='%23C9993B'%3E%3Crect x='20' y='20' width='15' height='60' rx='2'/%3E%3Crect x='57' y='20' width='23' height='15' rx='2'/%3E%3Crect x='40' y='42.5' width='23' height='15' rx='2'/%3E%3Crect x='57' y='65' width='23' height='15' rx='2'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preload" href="fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/manrope.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Space Grotesk";src:url(fonts/space-grotesk.woff2) format("woff2");font-weight:300 700;font-display:swap}
+@font-face{font-family:Manrope;src:url(fonts/manrope.woff2) format("woff2");font-weight:200 800;font-display:swap}
+:root{
+  --noir:#16130F;--noir2:#211D17;--papyrus:#F4EEE3;--or:#C9993B;--nil:#2E5A5C;--sable:#D8CFBD;
+  --line-l:#DDD3C1;--line-d:#36302A;--txt-l:#3B352D;--txt-d:#CFC6B6;
+  --display:"Space Grotesk",system-ui,sans-serif;--body:Manrope,system-ui,sans-serif;--mono:Manrope,system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--papyrus);color:var(--noir);font:17px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.mono{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.gold{color:var(--or)}
+h1,h2,h3{font-family:var(--display);font-weight:700;letter-spacing:-.02em;line-height:1.05}
+h2{font-size:clamp(36px,5.4vw,64px);margin:14px 0 24px}
+h3{font-size:22px;letter-spacing:-.01em}
+.lead{font-size:clamp(18px,1.6vw,21px);max-width:640px;color:var(--txt-l)}
+.dark{background:var(--noir);color:var(--papyrus)}
+.dark .lead{color:var(--txt-d)}
+section{padding:120px 0}
+.eyebrow{display:flex;justify-content:space-between;color:#6f6759;margin-bottom:8px}
+:focus-visible{outline:2px solid var(--or);outline-offset:3px}
+.dark .eyebrow{color:#8d8475}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:10px;font:500 13px var(--mono);letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:16px 26px;border-radius:999px;border:1px solid transparent;transition:transform .2s,background .2s,color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-or{background:var(--or);color:var(--noir)}
+.btn-or:hover{background:#d8a948}
+.btn-ghost{border-color:currentColor;opacity:.85}
+.btn-ghost:hover{opacity:1}
+.btn-noir{background:var(--noir);color:var(--papyrus)}
+
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:20;transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}
+nav.solid{background:rgba(22,19,15,.88);backdrop-filter:blur(12px);border-color:var(--line-d)}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--papyrus);font:700 20px var(--display);letter-spacing:.06em}
+.brand{font-size:21px;letter-spacing:.08em}.brand svg{width:22px;height:22px}
+nav ul{display:flex;gap:30px;list-style:none}
+nav ul a{text-decoration:none;color:#bdb3a2;font:12px var(--mono);letter-spacing:.18em;text-transform:uppercase}
+nav ul a:hover{color:var(--papyrus)}
+nav .btn{padding:11px 18px;font-size:11px}
+@media(max-width:860px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:center;overflow:hidden;padding:140px 0 60px}
+.pavage{position:absolute;inset:0;opacity:.13;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='100' viewBox='0 0 92 100'%3E%3Cg fill='none' stroke='%23C9993B' stroke-width='1.4'%3E%3Cpath d='M0 50L23 0L46 50L69 0L92 50M0 50L23 100L46 50L69 100L92 50M0 .7H92M0 50H92'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:92px 100px;mask-image:radial-gradient(ellipse at 75% 45%,#000 0,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 75% 45%,#000 0,transparent 70%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center;width:100%}
+.hero h1{font-size:clamp(46px,7.4vw,98px);margin:26px 0 30px}
+.hero .lead{max-width:560px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;margin-top:42px}
+.mark{width:100%;max-width:210px;justify-self:center}
+@keyframes float{50%{transform:translateY(-14px)}}
+.hero-stats{position:relative;margin-top:64px;color:#8d8475}
+.hero-stats .wrap{display:block;border-top:1px solid var(--line-d);padding-top:22px}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.mark{max-width:72px;justify-self:start;order:-1}.hero-stats{position:static;margin-top:50px}.hero{display:block}}
+
+/* manifeste */
+.quote{font-family:var(--display);font-weight:700;font-size:clamp(26px,3vw,38px);color:var(--nil);line-height:1.2;max-width:520px}
+.split{display:grid;grid-template-columns:1.1fr .9fr;gap:70px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr;gap:40px}}
+
+/* fondateur */
+.founder{display:grid;grid-template-columns:170px 1fr;gap:28px;align-items:end;margin-top:8px}
+.founder img{width:170px;height:auto;border-radius:14px;aspect-ratio:480/533;object-fit:cover}
+.founder p{font:700 clamp(20px,2vw,26px)/1.25 var(--display);letter-spacing:-.01em}
+.founder figcaption{margin-top:14px;font:600 14px var(--body);color:var(--nil)}
+@media(max-width:600px){.founder{grid-template-columns:1fr;gap:22px}.founder img{width:160px}}
+
+
+.path{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:22px;counter-reset:p}
+.path li{background:var(--noir);color:var(--papyrus);border-radius:8px;padding:16px 14px;display:flex;flex-direction:column;gap:2px}
+.path li:nth-child(2n){background:var(--nil)}.path li:last-child{background:var(--or);color:var(--noir)}
+.path b{font:700 18px var(--display)}.path i{font:600 12px var(--body);font-style:normal;opacity:.75}
+@media(max-width:760px){.path{grid-template-columns:1fr 1fr 1fr}}
+/* products */
+.products{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;margin-top:56px;align-items:start}
+.zeno{background:var(--noir);color:var(--papyrus);border-radius:20px;padding:40px 36px;display:grid;gap:14px}
+.zeno h3{font-size:56px;letter-spacing:-.03em}.zeno p{color:var(--txt-d);max-width:420px}
+
+.pulse{transform-box:fill-box;transform-origin:center;animation:pl 2.4s ease-out infinite}@keyframes pl{0%{opacity:.7;transform:scale(1)}100%{opacity:0;transform:scale(2.6)}}
+.zeno .zflow{font:700 clamp(24px,2.6vw,32px)/1.2 var(--display);letter-spacing:-.015em;color:var(--papyrus);max-width:none;margin-top:6px}.zeno .zflow span{color:var(--or)}
+.live{font:600 13px var(--body);color:var(--or);display:flex;align-items:center;gap:8px}.live::before{content:"";width:9px;height:9px;border-radius:2px;background:var(--or)}
+.others{list-style:none;border-top:1px solid var(--line-l)}
+.others li{display:grid;grid-template-columns:150px 1fr auto;gap:18px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line-l)}
+.others h3{font-size:26px}.others p{color:#5d564b;font-size:15px}
+.st{font:600 13px var(--body);color:#6b6357;white-space:nowrap}.st.on{color:var(--nil)}
+@media(max-width:960px){.products{grid-template-columns:1fr;gap:30px}}
+@media(max-width:560px){.others li{grid-template-columns:1fr;gap:4px}.zeno{padding:30px 24px}.zeno h3{font-size:44px}}
+
+/* chill@build */
+.villa{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.villa .txt{padding:110px 64px 110px max(24px,calc((100vw - 1180px)/2 + 24px))}
+.villa h2{font-size:clamp(46px,6vw,84px);letter-spacing:-.03em}
+.villa .img{width:100%;height:100%;object-fit:cover}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:34px 0}
+.chips span{border:1px solid var(--or);color:var(--or);border-radius:999px;padding:9px 18px;font:12px var(--mono);letter-spacing:.14em}
+@media(max-width:860px){.villa{grid-template-columns:1fr}.villa .img{min-height:340px}.villa .txt{padding:80px 24px}}
+.tl{margin-top:50px}
+.tl-days{display:grid;grid-template-columns:repeat(8,1fr);font:700 13px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--nil)}
+.tl-days span{padding:0 0 8px 12px;border-left:3px solid var(--noir)}
+.timeline{list-style:none;display:grid;grid-template-columns:repeat(8,1fr);border-top:3px solid var(--noir)}
+.timeline li{padding:14px 10px 14px 12px;font-size:14px;line-height:1.4;color:#5d564b;border-left:1px solid var(--line-l)}
+.timeline li:first-child,.timeline .s{border-left:3px solid var(--noir)}
+.timeline li b{display:block;font:700 22px/1.1 var(--display);color:var(--noir);margin-bottom:4px}
+.timeline .hot{background:var(--noir);color:var(--txt-d);border-radius:0 0 10px 10px}.timeline .hot b{color:var(--or)}
+.dd{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:860px){.tl-days{display:none}.timeline{grid-template-columns:1fr;border-top:0}.timeline li{display:grid;grid-template-columns:64px 1fr;align-items:baseline;border-left:3px solid var(--noir)}.timeline li b{margin:0}.timeline .dd{position:static;width:auto;height:auto;clip:auto;grid-column:2;font-weight:700;color:var(--nil);text-transform:uppercase;font-size:12px;letter-spacing:.1em;order:-1}.timeline .s,.timeline li:first-child{margin-top:16px}}
+/* carte + preuve */
+.map svg{width:100%;height:auto}.mc{font:700 18px var(--display);fill:#F4EEE3}.ms{font:600 12px var(--body);fill:#CFC6B6}.mc,.ms{paint-order:stroke;stroke:#16130F;stroke-width:5px;stroke-linejoin:round}
+.carte .split{align-items:center}
+.proof{font:500 clamp(17px,1.6vw,20px)/1.45 var(--body);color:var(--papyrus);max-width:760px;margin-bottom:8px}.proof b{font:700 1.35em var(--display);color:var(--or)}
+
+/* call */
+.chain{font-size:15px;color:var(--txt-d);margin-top:18px;border-top:1px solid var(--line-d);padding-top:14px;max-width:420px}.chain b{color:var(--or);font-weight:700}
+.apply{font-size:clamp(19px,2vw,24px);line-height:1.5;color:var(--papyrus);max-width:760px;margin-top:46px}
+.steps{counter-reset:s;display:grid;gap:0;margin-top:50px}
+.step{display:grid;grid-template-columns:90px 1fr;gap:20px;padding:34px 0;border-top:1px solid var(--line-d)}
+.step .n{font:700 44px/1 var(--display);color:var(--or)}
+.step p{color:var(--txt-d);margin-top:8px;max-width:640px}
+.slides{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;max-width:700px}
+.slides div{border:1px solid var(--line-d);border-radius:10px;padding:14px 16px;font-size:14px;color:var(--txt-d)}
+.slides b{display:block;color:var(--papyrus);font-family:var(--display);margin-bottom:4px}
+@media(max-width:640px){.step{grid-template-columns:1fr}.slides{grid-template-columns:1fr}}
+.mail{display:inline-block;margin-top:14px;font:600 15px var(--mono);color:var(--or)}.apply+.mail{font:700 clamp(22px,2.6vw,30px) var(--display);margin-top:22px;text-underline-offset:6px}
+
+/* contribute */
+[hidden]{display:none!important}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.cform,.cdone{margin-top:30px;background:var(--noir);color:var(--papyrus);border-radius:18px;padding:34px;display:grid;gap:20px}
+.cf-head h3,.cdone h3{font-size:24px}.cf-head p,.cdone p{color:var(--txt-d);margin-top:6px}
+.cform fieldset{border:0}.cform legend,.cform label{font:600 12px var(--body);letter-spacing:.1em;text-transform:uppercase;color:#8d8475}
+.cform em{text-transform:none;letter-spacing:0;font-style:normal;opacity:.7}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.chips input{position:absolute;opacity:0}
+.chips span{display:block;padding:10px 16px;border:1px solid var(--line-d);border-radius:999px;font:600 14px var(--body);letter-spacing:0;text-transform:none;color:var(--txt-d);cursor:pointer;transition:.2s}
+.chips input:checked+span{background:var(--or);border-color:var(--or);color:var(--noir)}.chips input:focus-visible+span{outline:2px solid var(--or);outline-offset:2px}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cform input:not([type=radio]),.cform textarea{display:block;width:100%;margin-top:8px;background:#0e0c09;border:1px solid var(--line-d);border-radius:12px;padding:13px 15px;color:var(--papyrus);font:15px var(--body);letter-spacing:0;text-transform:none;outline:none;resize:vertical}
+.cform input:focus,.cform textarea:focus{border-color:var(--or)}
+.cform .btn{justify-self:start;cursor:pointer;border:0}.cf-err{color:#e08a72;font-size:14px}
+.cd-btns{display:flex;gap:10px;flex-wrap:wrap}.cdone .btn{cursor:pointer;background:none;color:var(--papyrus)}.cdone .btn-or{background:var(--or);color:var(--noir)}
+.cd-back{background:none;border:0;color:#8d8475;font:600 13px var(--body);cursor:pointer;justify-self:start}
+@media(max-width:700px){.cf-row{grid-template-columns:1fr}.cform,.cdone{padding:24px}}
+
+.copybox{margin-top:30px;background:var(--noir);color:var(--papyrus);border-radius:16px;padding:28px 30px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+.copybox code{font:14px/1.7 var(--mono);color:var(--sable);flex:1;min-width:240px}
+.copybox button{cursor:pointer}
+
+footer{padding:90px 0 44px;background:var(--papyrus);border-top:1px solid var(--line-l)}
+.fhead{display:flex;align-items:center;gap:22px}footer svg{width:72px;flex:none;color:var(--or)}
+footer .big{font:700 clamp(36px,6vw,76px)/1 var(--display);letter-spacing:-.03em;max-width:12ch}footer .big span{color:var(--nil)}
+footer .bar{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--line-l);padding-top:24px;margin-top:40px;color:#6f6759}
+footer .bar a{text-decoration:none}
+.fnav{display:flex;flex-wrap:wrap;gap:8px 26px;margin-top:56px;font-weight:600}.fnav a{text-decoration:none;color:var(--txt-l)}.fnav a:hover,.sharebtn:hover{color:var(--nil)}footer .sharebtn{border-color:var(--line-l);color:var(--noir)}
+@media(max-width:600px){.fhead{flex-direction:column;align-items:flex-start}footer svg{width:52px}}
+.sharebtn{background:none;border:1px solid var(--line-d);color:var(--papyrus);font:600 15px var(--body);padding:6px 14px;border-radius:999px;cursor:pointer}
+
+
+/* trap animation */
+.trap{overflow:visible;cursor:pointer}
+.trap rect{transform-box:view-box}
+.trap .b2.armed{animation:arm 1.3s ease-in-out infinite}
+@keyframes arm{50%{fill:#F2C766;filter:drop-shadow(0 0 6px rgba(242,199,102,.75))}}
+.trap .glint{opacity:0}
+
+/* game */
+.game{display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:start}
+.board{position:relative;background:#0e0c09;border:1px solid var(--line-d);border-radius:14px;padding:10px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.board canvas{display:block;width:288px;height:480px;image-rendering:pixelated}
+.overlay{position:absolute;inset:10px;display:grid;place-items:center;text-align:center;background:rgba(14,12,9,.82);border-radius:6px;padding:20px}
+.overlay[hidden]{display:none}
+.overlay h3{font-size:26px;margin-bottom:8px}
+.overlay p{color:var(--txt-d);font-size:14px;margin-bottom:18px}
+.hud{display:flex;gap:30px;margin:28px 0}
+.hud b{display:block;font:700 40px/1 var(--display);color:var(--or)}
+.pieces{display:grid;grid-template-columns:repeat(auto-fill,minmax(72px,1fr));gap:14px 6px;margin-top:18px;max-width:520px}
+.pieces div{text-align:center}
+.pieces canvas{width:56px;height:42px;display:block;margin:0 auto 6px}
+.pieces span{font-size:11px;color:var(--txt-d);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.keys{margin-top:22px;color:var(--txt-d);font-size:14px}
+.keys kbd{font:600 12px var(--body);background:var(--noir2);border:1px solid var(--line-d);border-radius:5px;padding:2px 7px;color:var(--papyrus)}
+.pad{display:none;gap:8px;margin-top:12px;justify-content:center}
+.pad button{width:58px;height:50px;border-radius:12px;border:1px solid var(--line-d);background:var(--noir2);color:var(--papyrus);font-size:20px}
+@media(max-width:860px){.game{grid-template-columns:1fr;gap:30px}.board{justify-self:center}.pad{display:flex}.board canvas{width:264px;height:440px}}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}.pyr .cap{animation:none}.pulse{animation:none;opacity:0}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute"><defs><symbol id="k" viewBox="0 0 100 100"><g fill="currentColor"><rect x="10" y="10" width="20" height="80" rx="3"/><rect x="60" y="10" width="30" height="20" rx="3"/><rect x="38" y="40" width="30" height="20" rx="3"/><rect x="60" y="70" width="30" height="20" rx="3"/></g></symbol></defs></svg>
+<nav id="nav"><div class="wrap">
+  <a class="brand" href="#top"><svg viewBox="0 0 100 100" fill="currentColor" style="color:var(--or)"><use href="#k"/></svg>KMT</a>
+  <ul><li><a href="#fondation">Fondation</a></li><li><a href="#produits">Produits</a></li><li><a href="#communaute">Communauté</a></li><li><a href="#appel">Appel à projets</a></li><li><a href="#jeu">Jouer</a></li></ul>
+  <a class="btn btn-or" href="#contribuer">Contribuer</a>
+</div></nav>
+
+<header class="hero dark" id="top">
+  <div class="pavage"></div>
+  <div class="wrap">
+    <div>
+      <span class="mono gold">Fondation open source · Kemet</span>
+      <h1>Le logiciel libre <span class="gold">africain.</span></h1>
+      <p class="lead"><em>Kemet</em>, c'est « la terre noire », celle qui nourrit. On y plante du code libre pour les entreprises d'Abidjan, de Cotonou, de Dakar.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-or" href="#appel">Proposer un projet →</a>
+        <a class="btn btn-ghost" href="#produits">Découvrir Zeno</a>
+      </div>
+    </div>
+    <svg class="mark trap" id="trap" viewBox="0 0 100 100" aria-label="Le signe KMT — cliquer pour rejouer" role="img" style="color:var(--or)"><g fill="currentColor"><rect class="b0" x="10" y="10" width="20" height="80" rx="3"/><rect class="b b1" x="60" y="10" width="30" height="20" rx="3"/><rect class="b b2" x="38" y="40" width="30" height="20" rx="3"/><rect class="b b3" x="60" y="70" width="30" height="20" rx="3"/></g><defs><linearGradient id="gl" x1="0" x2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset=".5" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient><clipPath id="kc"><rect x="10" y="10" width="20" height="80" rx="3"/><rect x="60" y="10" width="30" height="20" rx="3"/><rect x="38" y="40" width="30" height="20" rx="3"/><rect x="60" y="70" width="30" height="20" rx="3"/></clipPath></defs><g clip-path="url(#kc)"><rect class="glint" x="-40" y="0" width="30" height="100" fill="url(#gl)" transform="skewX(-20)"/></g></svg>
+  </div>
+  <div class="hero-stats"><div class="wrap"><p class="proof"><b>5 476</b> commits sur Zeno, <b>1 255</b> pull requests fusionnées. Deux campus tournent dessus chaque jour.</p><span class="mono">GitHub, relevé du 6 novembre 2026 · lancement de la fondation en janvier 2027</span></div></div>
+</header>
+
+<main>
+<section id="fondation">
+  <div class="wrap">
+    <div class="split reveal">
+      <div>
+        <h2>La fondation porte le socle. <span class="gold">Tu bâtis dessus.</span></h2>
+        <p class="lead">Une structure à but non lucratif garde le code, la marque et la gouvernance. Aucune option payante cachée : auto-hébergé ou en SaaS, c'est le même logiciel. Les données restent ici.</p>
+      </div>
+      <figure class="founder">
+      <img src="img/fondateur-480.jpg" alt="Franck, fondateur de KMT, sur une plage d'Abidjan au coucher du soleil" width="480" height="533" loading="lazy">
+      <blockquote><p>« Je veux que le logiciel dont nos entreprises ont besoin soit écrit ici, et qu'il appartienne à tout le monde. »</p><figcaption>Franck, fondateur</figcaption></blockquote>
+    </figure>
+    </div>
+  </div>
+</section>
+
+<section id="produits" style="padding-top:40px">
+  <div class="wrap">
+    <h2 class="reveal">Quatre logiciels,<br>un seul système.</h2>
+    <div class="products reveal">
+      <article class="zeno">
+        <span class="live">En production · 2 campus</span>
+        <h3>Zeno</h3>
+        <p class="zflow">Un prospect écrit.<br>Zeno relance sur WhatsApp.<br><span>L'admission se signe en ligne.</span></p>
+        <p class="chain">Même chemin pour une couturière de Cotonou : vue sur <b>EDMS</b>, suivie dans <b>Zeno</b>, relancée sur WhatsApp, facturée dans <b>Gestion</b>.</p>
+      </article>
+      <ul class="others">
+        <li><h3>EDMS</h3><p>Le site, les contenus, les documents. Tout se retrouve.</p><span class="st on">Open source</span></li>
+        <li><h3>Gestion</h3><p>Factures, stocks, compta. En franc CFA, hors-ligne d'abord.</p><span class="st">En chantier</span></li>
+        <li><h3>DevPanel</h3><p>L'atelier où des agents écrivent le code et des humains le relisent.</p><span class="st on">Open source</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section class="dark carte">
+  <div class="wrap split">
+    <div class="reveal">
+      <h2>Là où ça <span class="gold">tourne déjà.</span></h2>
+      <p class="lead">Admissions, cours, paiements : à Abidjan et à Cotonou, Zeno fait le travail tous les jours. Dakar suit.</p>
+    </div>
+    <figure class="map reveal"><svg viewBox="0 0 528 288" role="img" aria-labelledby="map-t"><title id="map-t">Carte de l'Afrique de l'Ouest en briques : Zeno tourne à Abidjan et à Cotonou, Dakar est la prochaine étape.</title><g><path fill="#36302A" d="M16 0h13v13h-13zM32 0h13v13h-13zM48 0h13v13h-13zM64 0h13v13h-13zM80 0h13v13h-13zM96 0h13v13h-13zM112 0h13v13h-13zM128 0h13v13h-13zM144 0h13v13h-13zM160 0h13v13h-13zM192 0h13v13h-13zM208 0h13v13h-13zM224 0h13v13h-13zM240 0h13v13h-13zM256 0h13v13h-13zM272 0h13v13h-13zM288 0h13v13h-13zM304 0h13v13h-13zM320 0h13v13h-13zM336 0h13v13h-13zM368 0h13v13h-13zM384 0h13v13h-13zM400 0h13v13h-13zM416 0h13v13h-13zM432 0h13v13h-13zM448 0h13v13h-13zM464 0h13v13h-13zM480 0h13v13h-13zM496 0h13v13h-13zM512 0h13v13h-13zM16 16h13v13h-13zM32 16h13v13h-13zM48 16h13v13h-13zM64 16h13v13h-13zM80 16h13v13h-13zM96 16h13v13h-13zM112 16h13v13h-13zM128 16h13v13h-13zM160 16h13v13h-13zM176 16h13v13h-13zM192 16h13v13h-13zM208 16h13v13h-13zM224 16h13v13h-13zM240 16h13v13h-13zM256 16h13v13h-13zM272 16h13v13h-13zM288 16h13v13h-13zM304 16h13v13h-13zM336 16h13v13h-13zM352 16h13v13h-13zM368 16h13v13h-13zM384 16h13v13h-13zM400 16h13v13h-13zM416 16h13v13h-13zM432 16h13v13h-13zM448 16h13v13h-13zM464 16h13v13h-13zM480 16h13v13h-13zM512 16h13v13h-13zM32 32h13v13h-13zM48 32h13v13h-13zM64 32h13v13h-13zM80 32h13v13h-13zM96 32h13v13h-13zM128 32h13v13h-13zM144 32h13v13h-13zM160 32h13v13h-13zM176 32h13v13h-13zM192 32h13v13h-13zM208 32h13v13h-13zM224 32h13v13h-13zM240 32h13v13h-13zM256 32h13v13h-13zM272 32h13v13h-13zM304 32h13v13h-13zM320 32h13v13h-13zM336 32h13v13h-13zM352 32h13v13h-13zM368 32h13v13h-13zM384 32h13v13h-13zM400 32h13v13h-13zM416 32h13v13h-13zM432 32h13v13h-13zM448 32h13v13h-13zM480 32h13v13h-13zM496 32h13v13h-13zM512 32h13v13h-13zM32 48h13v13h-13zM48 48h13v13h-13zM64 48h13v13h-13zM96 48h13v13h-13zM112 48h13v13h-13zM128 48h13v13h-13zM144 48h13v13h-13zM160 48h13v13h-13zM176 48h13v13h-13zM192 48h13v13h-13zM208 48h13v13h-13zM224 48h13v13h-13zM240 48h13v13h-13zM272 48h13v13h-13zM288 48h13v13h-13zM304 48h13v13h-13zM320 48h13v13h-13zM336 48h13v13h-13zM352 48h13v13h-13zM368 48h13v13h-13zM384 48h13v13h-13zM400 48h13v13h-13zM416 48h13v13h-13zM448 48h13v13h-13zM464 48h13v13h-13zM480 48h13v13h-13zM496 48h13v13h-13zM512 48h13v13h-13zM32 64h13v13h-13zM64 64h13v13h-13zM80 64h13v13h-13zM96 64h13v13h-13zM112 64h13v13h-13zM128 64h13v13h-13zM144 64h13v13h-13zM160 64h13v13h-13zM176 64h13v13h-13zM192 64h13v13h-13zM208 64h13v13h-13zM240 64h13v13h-13zM256 64h13v13h-13zM272 64h13v13h-13zM288 64h13v13h-13zM304 64h13v13h-13zM320 64h13v13h-13zM336 64h13v13h-13zM352 64h13v13h-13zM368 64h13v13h-13zM384 64h13v13h-13zM416 64h13v13h-13zM432 64h13v13h-13zM448 64h13v13h-13zM464 64h13v13h-13zM480 64h13v13h-13zM496 64h13v13h-13zM512 64h13v13h-13zM32 80h13v13h-13zM48 80h13v13h-13zM64 80h13v13h-13zM80 80h13v13h-13zM96 80h13v13h-13zM112 80h13v13h-13zM128 80h13v13h-13zM144 80h13v13h-13zM160 80h13v13h-13zM176 80h13v13h-13zM208 80h13v13h-13zM224 80h13v13h-13zM240 80h13v13h-13zM256 80h13v13h-13zM272 80h13v13h-13zM288 80h13v13h-13zM304 80h13v13h-13zM320 80h13v13h-13zM336 80h13v13h-13zM352 80h13v13h-13zM384 80h13v13h-13zM400 80h13v13h-13zM416 80h13v13h-13zM432 80h13v13h-13zM448 80h13v13h-13zM464 80h13v13h-13zM480 80h13v13h-13zM496 80h13v13h-13zM512 80h13v13h-13zM16 96h13v13h-13zM32 96h13v13h-13zM48 96h13v13h-13zM64 96h13v13h-13zM80 96h13v13h-13zM96 96h13v13h-13zM112 96h13v13h-13zM128 96h13v13h-13zM144 96h13v13h-13zM176 96h13v13h-13zM192 96h13v13h-13zM208 96h13v13h-13zM224 96h13v13h-13zM240 96h13v13h-13zM256 96h13v13h-13zM272 96h13v13h-13zM288 96h13v13h-13zM304 96h13v13h-13zM320 96h13v13h-13zM352 96h13v13h-13zM368 96h13v13h-13zM384 96h13v13h-13zM400 96h13v13h-13zM416 96h13v13h-13zM432 96h13v13h-13zM448 96h13v13h-13zM464 96h13v13h-13zM480 96h13v13h-13zM496 96h13v13h-13zM16 112h13v13h-13zM32 112h13v13h-13zM48 112h13v13h-13zM64 112h13v13h-13zM80 112h13v13h-13zM96 112h13v13h-13zM112 112h13v13h-13zM144 112h13v13h-13zM160 112h13v13h-13zM176 112h13v13h-13zM192 112h13v13h-13zM208 112h13v13h-13zM224 112h13v13h-13zM240 112h13v13h-13zM256 112h13v13h-13zM272 112h13v13h-13zM288 112h13v13h-13zM320 112h13v13h-13zM336 112h13v13h-13zM352 112h13v13h-13zM368 112h13v13h-13zM384 112h13v13h-13zM400 112h13v13h-13zM416 112h13v13h-13zM432 112h13v13h-13zM448 112h13v13h-13zM464 112h13v13h-13zM496 112h13v13h-13zM512 112h13v13h-13zM16 128h13v13h-13zM32 128h13v13h-13zM48 128h13v13h-13zM64 128h13v13h-13zM80 128h13v13h-13zM112 128h13v13h-13zM128 128h13v13h-13zM144 128h13v13h-13zM160 128h13v13h-13zM176 128h13v13h-13zM192 128h13v13h-13zM208 128h13v13h-13zM224 128h13v13h-13zM240 128h13v13h-13zM256 128h13v13h-13zM288 128h13v13h-13zM304 128h13v13h-13zM320 128h13v13h-13zM336 128h13v13h-13zM352 128h13v13h-13zM368 128h13v13h-13zM384 128h13v13h-13zM400 128h13v13h-13zM416 128h13v13h-13zM432 128h13v13h-13zM464 128h13v13h-13zM480 128h13v13h-13zM496 128h13v13h-13zM512 128h13v13h-13zM16 144h13v13h-13zM32 144h13v13h-13zM48 144h13v13h-13zM80 144h13v13h-13zM96 144h13v13h-13zM112 144h13v13h-13zM128 144h13v13h-13zM144 144h13v13h-13zM160 144h13v13h-13zM176 144h13v13h-13zM192 144h13v13h-13zM208 144h13v13h-13zM224 144h13v13h-13zM256 144h13v13h-13zM272 144h13v13h-13zM288 144h13v13h-13zM304 144h13v13h-13zM320 144h13v13h-13zM336 144h13v13h-13zM352 144h13v13h-13zM368 144h13v13h-13zM384 144h13v13h-13zM400 144h13v13h-13zM432 144h13v13h-13zM448 144h13v13h-13zM464 144h13v13h-13zM480 144h13v13h-13zM496 144h13v13h-13zM512 144h13v13h-13zM48 160h13v13h-13zM64 160h13v13h-13zM80 160h13v13h-13zM96 160h13v13h-13zM112 160h13v13h-13zM128 160h13v13h-13zM144 160h13v13h-13zM160 160h13v13h-13zM176 160h13v13h-13zM192 160h13v13h-13zM224 160h13v13h-13zM240 160h13v13h-13zM256 160h13v13h-13zM272 160h13v13h-13zM288 160h13v13h-13zM304 160h13v13h-13zM320 160h13v13h-13zM336 160h13v13h-13zM352 160h13v13h-13zM368 160h13v13h-13zM400 160h13v13h-13zM416 160h13v13h-13zM432 160h13v13h-13zM448 160h13v13h-13zM464 160h13v13h-13zM480 160h13v13h-13zM496 160h13v13h-13zM512 160h13v13h-13zM64 176h13v13h-13zM80 176h13v13h-13zM96 176h13v13h-13zM112 176h13v13h-13zM128 176h13v13h-13zM144 176h13v13h-13zM160 176h13v13h-13zM192 176h13v13h-13zM208 176h13v13h-13zM224 176h13v13h-13zM240 176h13v13h-13zM256 176h13v13h-13zM272 176h13v13h-13zM288 176h13v13h-13zM304 176h13v13h-13zM320 176h13v13h-13zM336 176h13v13h-13zM368 176h13v13h-13zM384 176h13v13h-13zM400 176h13v13h-13zM416 176h13v13h-13zM432 176h13v13h-13zM448 176h13v13h-13zM464 176h13v13h-13zM480 176h13v13h-13zM496 176h13v13h-13zM512 176h13v13h-13zM80 192h13v13h-13zM96 192h13v13h-13zM112 192h13v13h-13zM128 192h13v13h-13zM160 192h13v13h-13zM176 192h13v13h-13zM192 192h13v13h-13zM208 192h13v13h-13zM224 192h13v13h-13zM240 192h13v13h-13zM256 192h13v13h-13zM272 192h13v13h-13zM288 192h13v13h-13zM304 192h13v13h-13zM336 192h13v13h-13zM352 192h13v13h-13zM368 192h13v13h-13zM384 192h13v13h-13zM400 192h13v13h-13zM416 192h13v13h-13zM432 192h13v13h-13zM448 192h13v13h-13zM464 192h13v13h-13zM480 192h13v13h-13zM512 192h13v13h-13zM80 208h13v13h-13zM96 208h13v13h-13zM128 208h13v13h-13zM144 208h13v13h-13zM160 208h13v13h-13zM176 208h13v13h-13zM192 208h13v13h-13zM208 208h13v13h-13zM224 208h13v13h-13zM240 208h13v13h-13zM256 208h13v13h-13zM272 208h13v13h-13zM304 208h13v13h-13zM320 208h13v13h-13zM336 208h13v13h-13zM352 208h13v13h-13zM368 208h13v13h-13zM384 208h13v13h-13zM400 208h13v13h-13zM416 208h13v13h-13zM432 208h13v13h-13zM448 208h13v13h-13zM480 208h13v13h-13zM496 208h13v13h-13zM512 208h13v13h-13zM96 224h13v13h-13zM112 224h13v13h-13zM128 224h13v13h-13zM144 224h13v13h-13zM160 224h13v13h-13zM176 224h13v13h-13zM192 224h13v13h-13zM208 224h13v13h-13zM224 224h13v13h-13zM240 224h13v13h-13zM272 224h13v13h-13zM288 224h13v13h-13zM304 224h13v13h-13zM320 224h13v13h-13zM336 224h13v13h-13zM352 224h13v13h-13zM368 224h13v13h-13zM384 224h13v13h-13zM400 224h13v13h-13zM416 224h13v13h-13zM448 224h13v13h-13zM464 224h13v13h-13zM480 224h13v13h-13zM496 224h13v13h-13zM512 224h13v13h-13zM112 240h13v13h-13zM128 240h13v13h-13zM144 240h13v13h-13zM160 240h13v13h-13zM176 240h13v13h-13zM192 240h13v13h-13zM208 240h13v13h-13zM240 240h13v13h-13zM256 240h13v13h-13zM272 240h13v13h-13zM288 240h13v13h-13zM304 240h13v13h-13zM320 240h13v13h-13zM336 240h13v13h-13zM352 240h13v13h-13zM368 240h13v13h-13zM384 240h13v13h-13zM416 240h13v13h-13zM432 240h13v13h-13zM448 240h13v13h-13zM464 240h13v13h-13zM480 240h13v13h-13zM496 240h13v13h-13zM512 240h13v13h-13zM144 256h13v13h-13zM160 256h13v13h-13zM176 256h13v13h-13zM208 256h13v13h-13zM224 256h13v13h-13zM240 256h13v13h-13zM384 256h13v13h-13zM400 256h13v13h-13zM416 256h13v13h-13zM432 256h13v13h-13zM448 256h13v13h-13zM464 256h13v13h-13zM480 256h13v13h-13zM496 256h13v13h-13zM512 256h13v13h-13zM384 272h13v13h-13zM400 272h13v13h-13zM416 272h13v13h-13zM432 272h13v13h-13zM448 272h13v13h-13zM464 272h13v13h-13zM480 272h13v13h-13zM496 272h13v13h-13z"/><path fill="#2E5A5C" d="M176 0h13v13h-13zM352 0h13v13h-13zM144 16h13v13h-13zM320 16h13v13h-13zM496 16h13v13h-13zM112 32h13v13h-13zM288 32h13v13h-13zM464 32h13v13h-13zM80 48h13v13h-13zM256 48h13v13h-13zM432 48h13v13h-13zM48 64h13v13h-13zM224 64h13v13h-13zM400 64h13v13h-13zM192 80h13v13h-13zM368 80h13v13h-13zM160 96h13v13h-13zM336 96h13v13h-13zM512 96h13v13h-13zM128 112h13v13h-13zM304 112h13v13h-13zM480 112h13v13h-13zM96 128h13v13h-13zM272 128h13v13h-13zM448 128h13v13h-13zM64 144h13v13h-13zM240 144h13v13h-13zM416 144h13v13h-13zM32 160h13v13h-13zM208 160h13v13h-13zM384 160h13v13h-13zM176 176h13v13h-13zM352 176h13v13h-13zM144 192h13v13h-13zM320 192h13v13h-13zM496 192h13v13h-13zM112 208h13v13h-13zM288 208h13v13h-13zM464 208h13v13h-13zM256 224h13v13h-13zM432 224h13v13h-13zM224 240h13v13h-13zM400 240h13v13h-13zM192 256h13v13h-13zM368 256h13v13h-13zM160 272h13v13h-13zM512 272h13v13h-13z"/></g><rect x="1.8000000000000114" y="109.80000000000001" width="14" height="14" rx="3" fill="none" stroke="#C9993B" stroke-width="2.5"/><text x="23" y="115" text-anchor="start" class="mc">Dakar</text><text x="23" y="133" text-anchor="start" class="ms">prochaine étape</text><rect class="pulse" x="216.0" y="258.4" width="16" height="16" rx="3" fill="none" stroke="#C9993B" stroke-width="2"/><rect x="216.0" y="258.4" width="16" height="16" rx="3" fill="#C9993B"/><text x="210" y="264" text-anchor="end" class="mc">Abidjan</text><text x="210" y="282" text-anchor="end" class="ms">campus · Zeno</text><rect class="pulse" style="animation-delay:1.2s" x="318.4" y="241.6" width="16" height="16" rx="3" fill="none" stroke="#C9993B" stroke-width="2"/><rect x="318.4" y="241.6" width="16" height="16" rx="3" fill="#C9993B"/><text x="340" y="248" text-anchor="start" class="mc">Cotonou</text><text x="340" y="266" text-anchor="start" class="ms">campus · Zeno</text></svg></figure>
+  </div>
+</section>
+
+<div class="villa dark" id="communaute">
+  <div class="txt reveal">
+    <span class="mono gold">Édition 01 · date et lieu bientôt</span>
+    <h2>chill @ build</h2>
+    <p class="lead" style="margin-top:8px">Un week-end dans une villa, une vingtaine de devs, designers et entrepreneurs. On code le samedi sur Zeno et EDMS, on montre le dimanche.</p>
+  </div>
+  <img class="img" src="img/villa.jpg" alt="La communauté réunie à la villa au coucher du soleil" loading="lazy" width="1200" height="800">
+</div>
+
+<section style="padding:110px 0 120px">
+  <div class="wrap">
+        <h2 class="reveal">Le week-end, heure par heure.</h2>
+    <div class="tl reveal">
+      <div class="tl-days" aria-hidden="true"><span style="grid-column:span 2">Vendredi</span><span style="grid-column:span 3">Samedi</span><span style="grid-column:span 3">Dimanche</span></div>
+      <ol class="timeline">
+        <li><b>18 h</b><span class="dd">Vendredi</span>On arrive, on s'installe</li>
+        <li><b>21 h</b>La vision KMT, autour du dîner</li>
+        <li class="s"><b>9 h</b><span class="dd">Samedi</span>Zeno de l'intérieur</li>
+        <li><b>11 h</b>Ateliers EDMS, mains sur le clavier</li>
+        <li class="hot"><b>15 h</b>Build par équipes, tard dans la nuit</li>
+        <li class="s"><b>10 h</b><span class="dd">Dimanche</span>Démos</li>
+        <li><b>12 h</b>Certification des intégrateurs</li>
+        <li><b>15 h</b>Qui fait quoi la semaine d'après</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="appel" style="position:relative;overflow:hidden">
+  <div class="pavage" style="opacity:.08"></div>
+  <div class="wrap" style="position:relative">
+    <div class="eyebrow mono"><span>Appel à projets · première vague</span></div>
+    <h2 class="reveal" style="font-size:clamp(46px,7.4vw,104px);max-width:12ch">Tu as écrit un logiciel <span class="gold">utile ici&nbsp;?</span></h2>
+    <p class="apply reveal">Prototype ou déjà en ligne, montre-le. Le lien GitHub du dépôt (avec sa licence), et trois slides : le problème et qui le vit, ce qui marche déjà, ce que tu veux faire avec nous. Objet «&nbsp;Candidature Kemet&nbsp;», on répond à tout le monde.</p>
+    <a class="mail reveal" href="mailto:fbi@devpanl.dev?subject=Candidature%20Kemet%20-%20">fbi@devpanl.dev →</a>
+  </div>
+</section>
+
+<section id="contribuer">
+  <div class="wrap">
+    
+    <h2 class="reveal">Pas de projet ?<br><span style="color:var(--nil)">Viens coder sur les nôtres.</span></h2>
+    <form class="cform reveal" id="cform" novalidate>
+      <div class="cf-head"><h3>Par où tu veux commencer ?</h3><p>Réponse sous 72 h, avec une première tâche.</p></div>
+      <fieldset><legend>Ton terrain</legend><div class="chips" id="chips">
+        <label><input type="radio" name="terrain" value="Code et intégrations" checked><span>Code</span></label>
+        <label><input type="radio" name="terrain" value="Documentation"><span>Documentation</span></label>
+        <label><input type="radio" name="terrain" value="Design"><span>Design</span></label>
+        <label><input type="radio" name="terrain" value="Traduction"><span>Traduction</span></label>
+        <label><input type="radio" name="terrain" value="Retours et tests"><span>Tester / signaler</span></label>
+      </div></fieldset>
+      <div class="cf-row">
+        <label>Prénom<input name="nom" required autocomplete="given-name"></label>
+        <label>Email <em>(pour qu'on te réponde)</em><input name="email" type="email" required autocomplete="email"></label>
+      </div>
+      <label>GitHub <em>(facultatif)</em><input name="gh" placeholder="github.com/…"></label>
+      <input name="site" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+      <label>Un mot sur toi ou ce que tu aimerais faire <em>(facultatif)</em><textarea name="msg" rows="3" placeholder="Ex. : je suis dev Python à Dakar, j'aimerais aider sur les intégrations de Zeno."></textarea></label>
+      <button class="btn btn-or" type="submit">Envoyer →</button>
+      <p class="cf-err" id="cf-err" hidden></p>
+    </form>
+    <div class="cdone" id="cdone" hidden>
+      <h3>Merci, c'est envoyé.</h3>
+      <p>On a bien reçu ton message. On te répond par mail sous 72 h avec une première tâche adaptée à ton terrain.</p>
+    </div>
+  </div>
+</section>
+
+<section class="dark" id="jeu" style="position:relative;overflow:hidden">
+  <div class="pavage" style="opacity:.06"></div>
+  <div class="wrap" style="position:relative">
+    <div class="game">
+      <div>
+        <div class="board">
+          <canvas id="cv" width="288" height="480" aria-label="Plateau de jeu Strates"></canvas>
+          <div class="overlay" id="ov"><div><h3 id="ovt">Strates</h3><p id="ovp">Empile les pierres, complète les couches.<br>Chaque couche pleine disparaît.</p><button class="btn btn-or" id="go" type="button">Jouer</button></div></div>
+        </div>
+        <div class="pad" id="pad"><button data-k="L" aria-label="Gauche">←</button><button data-k="R" aria-label="Tourner">↻</button><button data-k="D" aria-label="Descendre">↓</button><button data-k="Rt" aria-label="Droite">→</button><button data-k="H" aria-label="Lâcher">⤓</button></div>
+      </div>
+      <div>
+        <h2>Strates.<br><span class="gold">Le jeu.</span></h2>
+        <p class="lead">Onze pierres taillées à Kemet. Complète les couches, méfie-toi de la Strate K, en rouge.</p>
+        <div class="hud"><div><b id="sc">0</b><span class="mono" style="color:#8d8475">Score</span></div><div><b id="ln">0</b><span class="mono" style="color:#8d8475">Couches</span></div><div><b id="lv">1</b><span class="mono" style="color:#8d8475">Dynastie</span></div><div><b id="bs">0</b><span class="mono" style="color:#8d8475">Record</span></div></div>
+        <span class="mono" style="color:#8d8475">Les pierres de Kemet</span>
+        <div class="pieces" id="pcs"></div>
+        <p class="keys"><kbd>←</kbd> <kbd>→</kbd> déplacer · <kbd>↑</kbd> tourner · <kbd>↓</kbd> descendre · <kbd>Espace</kbd> lâcher · <kbd>P</kbd> pause</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<footer>
+  <div class="wrap">
+    <div class="fhead"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#k"/></svg><p class="big">Le logiciel libre <span>africain.</span></p></div>
+    <div class="fnav" role="navigation" aria-label="Pied de page"><a href="#fondation">Fondation</a><a href="#produits">Produits</a><a href="#communaute">Communauté</a><a href="#contribuer">Contribuer</a><a href="#jeu">Jouer</a><button type="button" id="share" class="sharebtn">Partager le site</button></div>
+    <div class="bar mono"><span>© 2026 Fondation KMT · Kemet</span><a href="mailto:fbi@devpanl.dev">fbi@devpanl.dev</a></div>
+  </div>
+</footer>
+
+<script>
+const nav=document.getElementById('nav');
+document.getElementById('share').addEventListener('click',async e=>{const u='https://openkmt.org/',b=e.currentTarget;try{if(navigator.share)await navigator.share({title:document.title,url:u});else{await navigator.clipboard.writeText(u);b.textContent='Lien copié'}}catch(_){}});
+const onScroll=()=>nav.classList.toggle('solid',scrollY>40);onScroll();addEventListener('scroll',onScroll,{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
+  e.target.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1400),v=Math.round(n*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('fr-FR');if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)})}}),{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+(function(){const f=document.getElementById('cform'),d=document.getElementById('cdone'),err=document.getElementById('cf-err');if(!f)return;
+ const show=m=>{err.textContent=m;err.hidden=false};
+ f.addEventListener('submit',async e=>{e.preventDefault();const v=Object.fromEntries(new FormData(f));
+  if(!v.nom.trim())return show('Ajoute ton prénom.'),f.nom.focus();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()))return show('Ajoute un email valide pour qu\'on puisse te répondre.'),f.email.focus();
+  err.hidden=true;const b=f.querySelector('button[type=submit]'),t=b.textContent;b.disabled=true;b.textContent='Envoi…';
+  try{const r=await fetch('/api/contribute',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(v)});
+   if(!r.ok)throw 0;f.hidden=true;d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'center'})}
+  catch{show("Oups, l'envoi a échoué. Réessaie dans un instant ou écris-nous à fbi@devpanl.dev.")}
+  finally{b.disabled=false;b.textContent=t}});
+})();
+
+/* ---- trap logo ---- */
+(function(){const t=document.getElementById('trap');if(!t||!t.animate)return;
+ const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const b0=t.querySelector('.b0'),b1=t.querySelector('.b1'),b2=t.querySelector('.b2'),b3=t.querySelector('.b3'),gl=t.querySelector('.glint');
+ b0.style.transformOrigin='20px 50px';
+ const T=(x,y,s)=>`translate(${x}px,${y}px)`+(s?` scale(${s})`:'');
+ const SH={b1:[-10,20],b2:[-18,10],b3:[-10,-20]};
+ const STEM=(x,y,r,s,k)=>`translate(${x}px,${y}px) rotate(${r}deg) scaleY(${s})`+(k?` scale(${k})`:'');
+ const STEM_SHUT=STEM(15,-10,90,.375);
+ const snap='cubic-bezier(.85,0,.15,1)';
+ let state='idle',auto;
+ function shut(){[b0,b1,b2,b3,t].forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
+  b1.style.transform=T(...SH.b1);b2.style.transform=T(...SH.b2);b3.style.transform=T(...SH.b3);b0.style.transform=STEM_SHUT;
+  b2.classList.add('armed');state='shut';t.setAttribute('aria-label','Le signe KMT — appuie sur la pierre en bas à gauche')}
+ const shake=(d,a)=>t.animate([{transform:'none'},{transform:`translate(${a}px,${a*.6}px)`},{transform:`translate(${-a*.8}px,${-a*.4}px)`},{transform:`translate(${a*.4}px,0)`},{transform:'none'}],{duration:230,delay:d,easing:'ease-out'});
+ function slide(el,from,to,d,dur,ov=3){const dx=to[0]-from[0],dy=to[1]-from[1],n=Math.hypot(dx,dy)||1;
+  return el.animate([{transform:T(...from),easing:snap},{transform:T(to[0]+dx/n*ov,to[1]+dy/n*ov),offset:.78,easing:'ease-out'},{transform:T(to[0]-dx/n*ov*.35,to[1]-dy/n*ov*.35),offset:.9},{transform:T(...to)}],{duration:dur,delay:d,fill:'forwards'})}
+ function play(){if(state!=='shut')return;state='running';clearTimeout(auto);b2.classList.remove('armed');
+  const s2=SH.b2;
+  b2.animate([{transform:T(...s2)},{transform:T(s2[0]+1.5,s2[1]+1.5,.9),offset:.45},{transform:T(s2[0]+1.5,s2[1]+1.5,.9),offset:.8},{transform:T(...s2)}],{duration:420,easing:'cubic-bezier(.3,0,.2,1)',fill:'forwards'});
+  shake(150,1.2);
+  slide(b1,SH.b1,[0,0],480,300,4);shake(700,2);
+  slide(b3,SH.b3,[0,0],760,300,4);shake(980,2);
+  b0.animate([{transform:STEM_SHUT,easing:snap},{transform:STEM(-1,-10,90,.375),offset:.85},{transform:STEM(0,-10,90,.375)}],{duration:300,delay:1100,fill:'forwards'});
+  shake(1330,1.2);
+  slide(b2,s2,[0,0],1420,320,3);shake(1660,1.4);
+  b0.animate([
+   {transform:STEM(0,-10,90,.375),easing:'cubic-bezier(.3,0,.3,1)'},
+   {transform:STEM(0,-14,90,.375,1.1),offset:.18,easing:'cubic-bezier(.7,0,.2,1)'},
+   {transform:STEM(0,-6,40,.62,1.06),offset:.5,easing:'cubic-bezier(.2,0,.2,1)'},
+   {transform:STEM(0,2,-6,1.06),offset:.78,easing:'ease-out'},
+   {transform:STEM(0,-1,2,.98),offset:.9},
+   {transform:STEM(0,0,0,1)}],{duration:900,delay:1820,fill:'forwards'});
+  shake(2520,3.2);
+  gl.animate([{opacity:0,transform:'skewX(-20deg) translateX(0)'},{opacity:1,offset:.2},{opacity:1,offset:.8},{opacity:0,transform:'skewX(-20deg) translateX(150px)'}],{duration:700,delay:2800,easing:'cubic-bezier(.4,0,.2,1)'});
+  setTimeout(()=>{state='done';t.setAttribute('aria-label','Le signe KMT — cliquer pour refermer')},2950)}
+ if(reduce)return;
+ shut();auto=setTimeout(play,1700);
+ t.addEventListener('click',()=>{if(state==='shut')play();else if(state==='done')shut()});
+})();
+
+/* ---- Strates game ---- */
+(function(){
+const cv=document.getElementById('cv');if(!cv)return;const x=cv.getContext('2d');
+const W=12,H=20,S=24;
+const P=[
+ {n:'Pierre',c:'#D8CFBD',w:2,m:[[1]]},
+ {n:'Brique',c:'#D8CFBD',w:2,m:[[1,1]]},
+ {n:'Sphinx',c:'#C9993B',w:.9,m:[[1,1,0,0,0],[1,1,1,1,1]]},
+ {n:'Pylône',c:'#2E5A5C',w:1,m:[[1,0,1],[1,1,1]]},
+ {n:'Ankh',c:'#C9993B',w:.5,m:[[0,1,1,1,0],[0,1,0,1,0],[1,1,1,1,1],[0,0,1,0,0],[0,0,1,0,0]]},
+ {n:'Escalier',c:'#2E5A5C',w:1,m:[[1,0,0],[1,1,0],[0,1,1]]},
+ {n:'Sceptre',c:'#C9993B',w:1,m:[[1,1,1,1],[0,1,0,0]]},
+ {n:'Rampe',c:'#D8CFBD',w:1,m:[[1,1,0,0],[0,1,1,1]]},
+ {n:'Mastaba',c:'#C9993B',w:1,m:[[0,1,1,0],[1,1,1,1]]},
+ {n:'Barque',c:'#2E5A5C',w:1,m:[[1,0,0,1],[1,1,1,1]]},
+ {n:'Strate K',c:'#B5432F',w:.5,m:[[1,0,1],[1,1,0],[1,0,1]]}
+];
+// piece previews
+const pcs=document.getElementById('pcs');
+P.forEach(p=>{const d=document.createElement('div'),c=document.createElement('canvas');c.width=56;c.height=42;const g=c.getContext('2d');const s=Math.min(50/p.m[0].length,38/p.m.length,12);const ox=(56-p.m[0].length*s)/2,oy=(42-p.m.length*s)/2;
+ p.m.forEach((r,j)=>r.forEach((v,i)=>{if(v){g.fillStyle=p.c;g.fillRect(ox+i*s+1,oy+j*s+1,s-2,s-2)}}));d.append(c);const sp=document.createElement('span');sp.textContent=p.n;d.append(sp);pcs.append(d)});
+let B,cur,nx,sc,ln,lv,drop,acc,last,run=false,over=false,paused=false;
+let best=0;try{best=+localStorage.getItem('kmt-strates')||0}catch(e){}
+const $=id=>document.getElementById(id);$('bs').textContent=best;
+const TW=P.reduce((a,p)=>a+p.w,0);const pick=()=>{let r=Math.random()*TW;for(const p of P){if((r-=p.w)<0)return p}return P[0]};const rnd=()=>{const p=pick();return{m:p.m.map(r=>r.slice()),c:p.c,x:0,y:0}};
+const spawn=()=>{cur=nx||rnd();nx=rnd();cur.x=(W-cur.m[0].length)>>1;cur.y=0;if(hit(cur.m,cur.x,cur.y))end()};
+const hit=(m,px,py)=>m.some((r,j)=>r.some((v,i)=>v&&(px+i<0||px+i>=W||py+j>=H||(py+j>=0&&B[py+j][px+i]))));
+const rot=m=>m[0].map((_,i)=>m.map(r=>r[i]).reverse());
+function lock(){cur.m.forEach((r,j)=>r.forEach((v,i)=>{if(v&&cur.y+j>=0)B[cur.y+j][cur.x+i]=cur.c}));
+ let n=0;for(let y=H-1;y>=0;y--){if(B[y].every(Boolean)){B.splice(y,1);B.unshift(Array(W).fill(0));n++;y++}}
+ if(n){ln+=n;sc+=[0,100,300,500,800,1200,1600][n]*lv;lv=1+Math.floor(ln/8);drop=Math.max(90,700-(lv-1)*65)}
+ hud();spawn()}
+function hud(){$('sc').textContent=sc;$('ln').textContent=ln;$('lv').textContent=lv}
+function cell(px,py,c){x.fillStyle=c;x.fillRect(px*S+1.5,py*S+1.5,S-3,S-3);x.fillStyle='rgba(255,255,255,.12)';x.fillRect(px*S+1.5,py*S+1.5,S-3,3)}
+function draw(){x.fillStyle='#0e0c09';x.fillRect(0,0,cv.width,cv.height);
+ x.strokeStyle='rgba(201,153,59,.06)';for(let i=1;i<W;i++){x.beginPath();x.moveTo(i*S,0);x.lineTo(i*S,H*S);x.stroke()}
+ B.forEach((r,j)=>r.forEach((c,i)=>c&&cell(i,j,c)));
+ if(cur){let gy=cur.y;while(!hit(cur.m,cur.x,gy+1))gy++;x.globalAlpha=.18;cur.m.forEach((r,j)=>r.forEach((v,i)=>v&&cell(cur.x+i,gy+j,cur.c)));x.globalAlpha=1;
+  cur.m.forEach((r,j)=>r.forEach((v,i)=>v&&cur.y+j>=0&&cell(cur.x+i,cur.y+j,cur.c)))}}
+function step(t){if(!run)return;if(!paused){acc+=t-last;if(acc>drop){acc=0;if(!hit(cur.m,cur.x,cur.y+1))cur.y++;else lock()}draw()}last=t;requestAnimationFrame(step)}
+function start(){B=Array.from({length:H},()=>Array(W).fill(0));sc=ln=0;lv=1;drop=700;acc=0;nx=null;over=false;paused=false;hud();spawn();$('ov').hidden=true;run=true;last=performance.now();requestAnimationFrame(step)}
+function end(){run=false;over=true;if(sc>best){best=sc;try{localStorage.setItem('kmt-strates',best)}catch(e){}$('bs').textContent=best}
+ $('ovt').textContent='Fin de dynastie';$('ovp').innerHTML=sc+' points · '+ln+' couches.<br>Les pyramides aussi ont mis du temps.<br><small style="opacity:.7">La Strate K, en rouge, est un piège. Tu étais prévenu.</small>';$('go').textContent='Rejouer';$('ov').hidden=false}
+function act(k){if(!run||paused||!cur)return;
+ if(k==='L'&&!hit(cur.m,cur.x-1,cur.y))cur.x--;
+ if(k==='Rt'&&!hit(cur.m,cur.x+1,cur.y))cur.x++;
+ if(k==='D'){if(!hit(cur.m,cur.x,cur.y+1)){cur.y++;sc+=1;hud()}}
+ if(k==='R'){const r=rot(cur.m);for(const dx of[0,-1,1,-2,2])if(!hit(r,cur.x+dx,cur.y)){cur.m=r;cur.x+=dx;break}}
+ if(k==='H'){while(!hit(cur.m,cur.x,cur.y+1)){cur.y++;sc+=2}lock()}
+ draw()}
+$('go').onclick=start;
+const map={ArrowLeft:'L',ArrowRight:'Rt',ArrowDown:'D',ArrowUp:'R',' ':'H'};
+addEventListener('keydown',e=>{if(!run)return;if(e.key==='p'||e.key==='P'){paused=!paused;if(!paused){last=performance.now()}return}
+ const k=map[e.key];if(k){e.preventDefault();act(k)}});
+document.querySelectorAll('#pad button').forEach(b=>b.addEventListener('pointerdown',e=>{e.preventDefault();act(b.dataset.k)}));
+new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting&&run&&!paused)paused=true}),{threshold:.2}).observe(cv);
+cv.addEventListener('click',()=>{if(run&&paused){paused=false;last=performance.now()}});
+B=Array.from({length:H},()=>Array(W).fill(0));draw();
+})();
+</script>
+</body>
+</html>
