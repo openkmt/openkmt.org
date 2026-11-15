@@ -150,6 +150,28 @@ nav .btn{padding:11px 18px;font-size:11px}
 @media(max-width:640px){.step{grid-template-columns:1fr}.slides{grid-template-columns:1fr}}
 .mail{display:inline-block;margin-top:14px;font:600 15px var(--mono);color:var(--or)}.apply+.mail{font:700 clamp(22px,2.6vw,30px) var(--display);margin-top:22px;text-underline-offset:6px}
 
+/* chat d'accueil */
+.chat-cta{border:0;cursor:pointer}.altmail{color:inherit;opacity:.65;font-size:14px}.altmail:hover{opacity:1}
+.ccta{margin-top:30px;background:var(--noir);color:var(--papyrus);border-radius:18px;padding:34px;display:grid;gap:22px}.ccta p{color:var(--txt-d);max-width:56ch}
+.chat-ov{position:fixed;inset:0;background:rgba(10,9,7,.55);backdrop-filter:blur(3px);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
+.chat-ov.on{opacity:1;pointer-events:auto}
+.chat{position:fixed;top:0;right:0;bottom:0;width:min(440px,100%);z-index:91;background:var(--noir);color:var(--papyrus);display:flex;flex-direction:column;transform:translateX(102%);transition:transform .32s cubic-bezier(.2,.8,.2,1);box-shadow:-20px 0 60px rgba(0,0,0,.35)}
+.chat.on{transform:none}
+.chat-h{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid var(--line-d)}
+.chat-h svg{width:26px;height:26px;color:var(--or)}.chat-h b{font:700 16px var(--display);display:block}.chat-h small{color:#8d8475;font-size:12px}
+.chat-x{margin-left:auto;background:none;border:0;color:var(--papyrus);font-size:26px;line-height:1;cursor:pointer;padding:4px 8px;border-radius:8px}.chat-x:hover{background:#2a251f}
+.chat-l{flex:1;overflow-y:auto;padding:22px 20px;display:flex;flex-direction:column;gap:12px;overscroll-behavior:contain}
+.msg{max-width:86%;padding:11px 15px;border-radius:16px;font-size:15px;line-height:1.55;white-space:pre-wrap;word-wrap:break-word}
+.msg.a{background:#221e19;border-bottom-left-radius:5px;align-self:flex-start}.msg.u{background:var(--or);color:var(--noir);border-bottom-right-radius:5px;align-self:flex-end}
+.msg.ok{background:var(--nil);align-self:stretch;max-width:none}
+.typing{display:inline-flex;gap:4px}.typing i{width:6px;height:6px;border-radius:50%;background:#8d8475;animation:tp 1s infinite}.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tp{0%,60%,100%{opacity:.3}30%{opacity:1}}
+.chat-s{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 12px}.chat-s button{background:none;border:1px solid var(--line-d);color:var(--txt-d);border-radius:999px;padding:8px 13px;font:600 13px var(--body);cursor:pointer}.chat-s button:hover{border-color:var(--or);color:var(--or)}
+.chat-f{display:flex;gap:8px;padding:14px 16px calc(14px + env(safe-area-inset-bottom));border-top:1px solid var(--line-d)}
+.chat-f textarea{flex:1;resize:none;background:#0e0c09;border:1px solid var(--line-d);border-radius:14px;padding:12px 14px;color:var(--papyrus);font:15px/1.4 var(--body);max-height:140px;outline:none}.chat-f textarea:focus{border-color:var(--or)}
+.chat-f button{background:var(--or);color:var(--noir);border:0;border-radius:14px;width:48px;font-size:20px;cursor:pointer}.chat-f button:disabled{opacity:.4;cursor:default}
+.chat-note{font-size:11px;color:#6f675a;text-align:center;padding:0 16px 10px}
+@media (prefers-reduced-motion:reduce){.chat,.chat-ov{transition:none}}
 /* contribute */
 [hidden]{display:none!important}.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .cform,.cdone{margin-top:30px;background:var(--noir);color:var(--papyrus);border-radius:18px;padding:34px;display:grid;gap:20px}
@@ -219,7 +241,7 @@ footer .bar a{text-decoration:none}
 <nav id="nav"><div class="wrap">
   <a class="brand" href="#top"><svg viewBox="0 0 100 100" fill="currentColor" style="color:var(--or)"><use href="#k"/></svg>KMT</a>
   <ul><li><a href="#fondation">Fondation</a></li><li><a href="#produits">Produits</a></li><li><a href="#communaute">Communauté</a></li><li><a href="#appel">Appel à projets</a></li><li><a href="#jeu">Jouer</a></li></ul>
-  <a class="btn btn-or" href="#contribuer">Contribuer</a>
+  <a class="btn btn-or" href="#contribuer" data-chat="contribuer">Contribuer</a>
 </div></nav>
 
 <header class="hero dark" id="top">
@@ -230,7 +252,7 @@ footer .bar a{text-decoration:none}
       <h1>Le logiciel libre <span class="gold">africain.</span></h1>
       <p class="lead"><em>Kemet</em>, c'est « la terre noire », celle qui nourrit. On y plante du code libre pour les entreprises d'Abidjan, de Cotonou, de Dakar.</p>
       <div class="hero-ctas">
-        <a class="btn btn-or" href="#appel">Proposer un projet →</a>
+        <a class="btn btn-or" href="#appel" data-chat="projet">Proposer un projet →</a>
         <a class="btn btn-ghost" href="#produits">Découvrir Zeno</a>
       </div>
     </div>
@@ -318,8 +340,8 @@ footer .bar a{text-decoration:none}
   <div class="wrap" style="position:relative">
     <div class="eyebrow mono"><span>Appel à projets · première vague</span></div>
     <h2 class="reveal" style="font-size:clamp(46px,7.4vw,104px);max-width:12ch">Tu as écrit un logiciel <span class="gold">utile ici&nbsp;?</span></h2>
-    <p class="apply reveal">Prototype ou déjà en ligne, montre-le. Le lien GitHub du dépôt (avec sa licence), et trois slides : le problème et qui le vit, ce qui marche déjà, ce que tu veux faire avec nous. Objet «&nbsp;Candidature Kemet&nbsp;», on répond à tout le monde.</p>
-    <a class="mail reveal" href="mailto:fbi@devpanl.dev?subject=Candidature%20Kemet%20-%20">fbi@devpanl.dev →</a>
+    <p class="apply reveal">Prototype ou déjà en ligne, montre-le. Le lien GitHub du dépôt (avec sa licence), et trois slides : le problème et qui le vit, ce qui marche déjà, ce que tu veux faire avec nous. On te pose quelques questions, deux minutes, et on répond à tout le monde.</p>
+    <div class="reveal" style="display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:34px"><button class="btn btn-or chat-cta" type="button" data-chat="projet">Présenter mon projet →</button><a class="altmail" href="mailto:fbi@devpanl.dev?subject=Candidature%20Kemet">ou par mail</a></div>
   </div>
 </section>
 
@@ -327,29 +349,11 @@ footer .bar a{text-decoration:none}
   <div class="wrap">
     
     <h2 class="reveal">Pas de projet ?<br><span style="color:var(--nil)">Viens coder sur les nôtres.</span></h2>
-    <form class="cform reveal" id="cform" novalidate>
-      <div class="cf-head"><h3>Par où tu veux commencer ?</h3><p>Réponse sous 72 h, avec une première tâche.</p></div>
-      <fieldset><legend>Ton terrain</legend><div class="chips" id="chips">
-        <label><input type="radio" name="terrain" value="Code et intégrations" checked><span>Code</span></label>
-        <label><input type="radio" name="terrain" value="Documentation"><span>Documentation</span></label>
-        <label><input type="radio" name="terrain" value="Design"><span>Design</span></label>
-        <label><input type="radio" name="terrain" value="Traduction"><span>Traduction</span></label>
-        <label><input type="radio" name="terrain" value="Retours et tests"><span>Tester / signaler</span></label>
-      </div></fieldset>
-      <div class="cf-row">
-        <label>Prénom<input name="nom" required autocomplete="given-name"></label>
-        <label>Email <em>(pour qu'on te réponde)</em><input name="email" type="email" required autocomplete="email"></label>
-      </div>
-      <label>GitHub <em>(facultatif)</em><input name="gh" placeholder="github.com/…"></label>
-      <input name="site" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
-      <label>Un mot sur toi ou ce que tu aimerais faire <em>(facultatif)</em><textarea name="msg" rows="3" placeholder="Ex. : je suis dev Python à Dakar, j'aimerais aider sur les intégrations de Zeno."></textarea></label>
-      <button class="btn btn-or" type="submit">Envoyer →</button>
-      <p class="cf-err" id="cf-err" hidden></p>
-    </form>
-    <div class="cdone" id="cdone" hidden>
-      <h3>Merci, c'est envoyé.</h3>
-      <p>On a bien reçu ton message. On te répond par mail sous 72 h avec une première tâche adaptée à ton terrain.</p>
+    <div class="ccta reveal">
+      <p>Code, doc, design, traduction ou tests : dis-nous ce que tu sais faire, on te propose une première tâche sous 72&nbsp;h.</p>
+      <div style="display:flex;gap:22px;align-items:center;flex-wrap:wrap"><button class="btn btn-or chat-cta" type="button" data-chat="contribuer">Je veux contribuer →</button><a class="altmail" href="mailto:fbi@devpanl.dev?subject=Contribution%20Kemet">ou par mail</a></div>
     </div>
+
   </div>
 </section>
 
@@ -392,17 +396,6 @@ const onScroll=()=>nav.classList.toggle('solid',scrollY>40);onScroll();addEventL
 const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);
   e.target.querySelectorAll('[data-n]').forEach(el=>{const n=+el.dataset.n,t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1400),v=Math.round(n*(1-Math.pow(1-p,3)));el.textContent=v.toLocaleString('fr-FR');if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)})}}),{threshold:.15});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
-(function(){const f=document.getElementById('cform'),d=document.getElementById('cdone'),err=document.getElementById('cf-err');if(!f)return;
- const show=m=>{err.textContent=m;err.hidden=false};
- f.addEventListener('submit',async e=>{e.preventDefault();const v=Object.fromEntries(new FormData(f));
-  if(!v.nom.trim())return show('Ajoute ton prénom.'),f.nom.focus();
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim()))return show('Ajoute un email valide pour qu\'on puisse te répondre.'),f.email.focus();
-  err.hidden=true;const b=f.querySelector('button[type=submit]'),t=b.textContent;b.disabled=true;b.textContent='Envoi…';
-  try{const r=await fetch('/api/contribute',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(v)});
-   if(!r.ok)throw 0;f.hidden=true;d.hidden=false;d.scrollIntoView({behavior:'smooth',block:'center'})}
-  catch{show("Oups, l'envoi a échoué. Réessaie dans un instant ou écris-nous à fbi@devpanl.dev.")}
-  finally{b.disabled=false;b.textContent=t}});
-})();
 
 /* ---- trap logo ---- */
 (function(){const t=document.getElementById('trap');if(!t||!t.animate)return;
@@ -503,6 +496,42 @@ document.querySelectorAll('#pad button').forEach(b=>b.addEventListener('pointerd
 new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting&&run&&!paused)paused=true}),{threshold:.2}).observe(cv);
 cv.addEventListener('click',()=>{if(run&&paused){paused=false;last=performance.now()}});
 B=Array.from({length:H},()=>Array(W).fill(0));draw();
+})();
+</script>
+<div class="chat-ov" id="chat-ov"></div>
+<aside class="chat" id="chat" role="dialog" aria-modal="true" aria-labelledby="chat-t" aria-hidden="true">
+  <div class="chat-h"><svg viewBox="0 0 100 100" fill="currentColor" aria-hidden="true"><use href="#k"/></svg><div><b id="chat-t">Accueil KMT</b><small id="chat-st">Réponse en direct · l'équipe lit tout</small></div><button class="chat-x" id="chat-x" type="button" aria-label="Fermer">×</button></div>
+  <div class="chat-l" id="chat-l" aria-live="polite"></div>
+  <div class="chat-s" id="chat-s"></div>
+  <form class="chat-f" id="chat-f"><textarea id="chat-i" rows="1" placeholder="Écris ici…" aria-label="Ton message" maxlength="2000"></textarea><button type="submit" id="chat-b" aria-label="Envoyer">↑</button></form>
+  <p class="chat-note">Assistant IA. Tes réponses sont transmises à l'équipe KMT pour te recontacter.</p>
+</aside>
+<script>
+(function(){const P=document.getElementById('chat'),O=document.getElementById('chat-ov'),L=document.getElementById('chat-l'),S=document.getElementById('chat-s'),F=document.getElementById('chat-f'),I=document.getElementById('chat-i'),B=document.getElementById('chat-b');if(!P)return;
+ const INTRO={projet:{t:"Salut ! Tu as un logiciel utile ici ? Raconte-moi en deux mots ce qu'il fait, et pour qui.",s:["Une appli pour les commerçants","Un outil pour les écoles","Je préfère commencer par me présenter"]},
+  contribuer:{t:"Salut ! Content que tu veuilles nous rejoindre. Qu'est-ce que tu aimes faire : code, doc, design, traduction, tests ?",s:["Du code","Du design","De la doc ou de la traduction","Tester et signaler des bugs"]}};
+ let mode='projet',msgs=[],busy=false,done=false,last=null;
+ const add=(r,t,c)=>{const d=document.createElement('div');d.className='msg '+(c||r);d.textContent=t;L.append(d);L.scrollTop=L.scrollHeight;return d};
+ const chips=a=>{S.innerHTML='';(a||[]).forEach(t=>{const b=document.createElement('button');b.type='button';b.textContent=t;b.onclick=()=>send(t);S.append(b)})};
+ function open(m){last=document.activeElement;if(m!==mode||done){mode=m;msgs=[];done=false;L.innerHTML='';}
+  if(!msgs.length){add('a',INTRO[mode].t);msgs.push({role:'assistant',content:INTRO[mode].t});chips(INTRO[mode].s)}
+  document.getElementById('chat-t').textContent=mode==='projet'?'Proposer un projet':'Contribuer à KMT';
+  P.classList.add('on');O.classList.add('on');P.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';setTimeout(()=>I.focus(),250)}
+ function close(){P.classList.remove('on');O.classList.remove('on');P.setAttribute('aria-hidden','true');document.body.style.overflow='';last&&last.focus&&last.focus()}
+ async function send(t){t=(t||'').trim();if(!t||busy||done)return;chips();add('u',t);msgs.push({role:'user',content:t});I.value='';I.style.height='';busy=true;B.disabled=true;
+  const w=add('a','');w.innerHTML='<span class="typing"><i></i><i></i><i></i></span>';
+  try{const r=await fetch('/api/chat',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({mode,messages:msgs.slice(1)})});
+   if(!r.ok)throw 0;const j=await r.json();w.textContent=j.reply;msgs.push({role:'assistant',content:j.reply});
+   if(j.done){done=true;add('a',j.sent?"✓ C'est transmis à l'équipe. Tu recevras une réponse par mail.":"Petit souci d'envoi de notre côté : écris-nous à fbi@devpanl.dev, on s'en occupe.",'ok');I.disabled=true;I.placeholder='Conversation terminée'}}
+  catch{w.textContent="Je n'arrive pas à répondre pour l'instant. Écris-nous à fbi@devpanl.dev, on répond à tout le monde."}
+  finally{busy=false;B.disabled=false;L.scrollTop=L.scrollHeight}}
+ document.addEventListener('click',e=>{const a=e.target.closest('[data-chat]');if(a){e.preventDefault();open(a.dataset.chat)}});
+ O.onclick=close;document.getElementById('chat-x').onclick=close;
+ document.addEventListener('keydown',e=>{if(e.key==='Escape'&&P.classList.contains('on'))close()});
+ F.onsubmit=e=>{e.preventDefault();send(I.value)};
+ I.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send(I.value)}});
+ I.addEventListener('input',()=>{I.style.height='auto';I.style.height=Math.min(I.scrollHeight,140)+'px'});
+ if(location.hash==='#postuler')open('projet');
 })();
 </script>
 </body>
