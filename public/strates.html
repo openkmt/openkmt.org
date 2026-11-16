@@ -48,6 +48,11 @@ main{padding:clamp(24px,4vw,56px) 0 clamp(56px,7vw,96px)}
 .pad{display:none;gap:8px;margin-top:12px;justify-content:center}
 .pad button{width:58px;height:50px;border-radius:12px;border:1px solid var(--line-d);background:var(--noir2);color:var(--papyrus);font-size:20px}
 @media(max-width:860px){.game{grid-template-columns:1fr;gap:30px}.board{justify-self:center}.pad{display:flex}.board canvas{width:264px;height:440px}}
+/* petit écran : la colonne ne doit pas dépasser la fenêtre */
+.game>div{min-width:0}
+.hud{flex-wrap:wrap;gap:20px 30px}
+@media(max-width:560px){.lead{text-align:start;hyphens:manual;-webkit-hyphens:manual}}
+@media(max-width:860px){.game{grid-template-columns:minmax(0,1fr)}.board{max-width:100%}}
 </style>
 </head>
 <body>
