@@ -30,7 +30,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--noir);color:var(--papyrus);font:18px/1.65 var(--body);-webkit-font-smoothing:antialiased}
+body{overflow-x:clip;background:var(--noir);color:var(--papyrus);font:18px/1.65 var(--body);-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{color:inherit}
 em{font-style:normal;font-weight:600}
@@ -81,7 +81,7 @@ main{display:grid;gap:16px}
 .hero-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:56px;align-items:end}
 h1{font-size:clamp(50px,7.6vw,102px);line-height:.96;letter-spacing:-.04em}
 .hero .lead{margin-top:28px;max-width:46ch}
-.proof{margin-top:clamp(48px,6vw,80px);border-top:1px solid var(--l);padding-top:28px;display:grid;gap:20px}
+.proof{border-top:1px solid var(--l);padding-top:28px;display:grid;gap:20px}
 .figs{list-style:none;display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:20px clamp(32px,6vw,88px)}
 .figs b{display:block;font:700 clamp(40px,4.6vw,60px)/1 var(--display);letter-spacing:-.03em;color:var(--or);font-variant-numeric:tabular-nums}
 .figs span{display:block;margin-top:8px;font-size:16px;color:var(--mute);max-width:22ch;line-height:1.4}
@@ -191,11 +191,12 @@ footer nav a{text-decoration:none;color:var(--mute)}footer nav a:hover{color:var
 @keyframes k1{0%,15%{transform:translateY(-34px);opacity:0}22%,84%{transform:none;opacity:1}91%,100%{transform:translateY(-34px);opacity:0}}
 @media (prefers-reduced-motion:reduce){.bigk rect{animation:none}.kbtn{cursor:default}.kbtn .kbtn-ic{display:none!important}}
 /* nid d'abeille de la v1, derrière le hero */
-.pavage{position:absolute;top:0;left:0;right:0;height:min(100vh,820px);opacity:.13;pointer-events:none;
+/* le motif couvre le haut du hero sur toute la largeur et s'arrête au filet des chiffres */
+.hero-top{position:relative;padding-bottom:clamp(48px,6vw,80px)}
+.hero-top>:not(.pavage){position:relative}
+.pavage{position:absolute;top:0;bottom:0;left:50%;width:100vw;margin-left:-50vw;opacity:.13;pointer-events:none;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='92' height='100' viewBox='0 0 92 100'%3E%3Cg fill='none' stroke='%23C9993B' stroke-width='1.4'%3E%3Cpath d='M0 50L23 0L46 50L69 0L92 50M0 50L23 100L46 50L69 100L92 50M0 .7H92M0 50H92'/%3E%3C/g%3E%3C/svg%3E");
   background-size:92px 100px;mask-image:radial-gradient(ellipse at 75% 45%,#000 0,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 75% 45%,#000 0,transparent 70%)}
-.pavage+.wrap{position:relative}
-@media(max-width:900px){.pavage{height:520px}}
 
 /* chat d'accueil */
 .chat-ov{position:fixed;inset:0;background:rgba(10,9,7,.55);backdrop-filter:blur(3px);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -224,11 +225,12 @@ footer nav a{text-decoration:none;color:var(--mute)}footer nav a:hover{color:var
 </head>
 <body>
 <a class="skip" href="#contenu">Aller au contenu</a>
-<div class="pavage" aria-hidden="true"></div>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><symbol id="k" viewBox="0 0 100 100"><g fill="currentColor"><rect x="10" y="10" width="20" height="80" rx="3"/><rect x="60" y="10" width="30" height="20" rx="3"/><rect x="38" y="40" width="30" height="20" rx="3"/><rect x="60" y="70" width="30" height="20" rx="3"/></g></symbol></defs></svg>
 
 <div class="wrap">
 <header class="hero" id="top">
+  <div class="hero-top">
+  <div class="pavage" aria-hidden="true"></div>
   <div>
     <div class="nav">
       <a class="lockup" href="#top"><svg viewBox="0 0 100 100" aria-hidden="true"><use href="#k"/></svg>KMT</a>
@@ -249,6 +251,9 @@ footer nav a{text-decoration:none;color:var(--mute)}footer nav a:hover{color:var
         <span class="kbtn-ic" aria-hidden="true"><svg class="i-pause" viewBox="0 0 14 14"><rect x="2" y="1" width="4" height="12" rx="1" fill="currentColor"/><rect x="8" y="1" width="4" height="12" rx="1" fill="currentColor"/></svg><svg class="i-play" viewBox="0 0 14 14"><path d="M3 1.5v11l9-5.5z" fill="currentColor"/></svg></span>
       </button>
     </div>
+  </div>
+  </div>
+  <div>
     <div class="proof">
       <ul class="figs">
         <li><b>2</b><span>entreprises tournent dessus chaque jour</span></li>
